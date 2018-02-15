@@ -1,0 +1,72 @@
+<div class="row">
+
+  <div class="col-md-4">
+
+    <div class="form-group">
+      <label for="firstName">First Name:</label>
+      <input type="text" class="form-control" [(ngModel)]="userForm.firstName" id="firstName"/>
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Last Name:</label>
+      <input type="text" class="form-control" [(ngModel)]="userForm.lastName" id="lastName"/>
+    </div>
+
+    <div class="form-group">
+      <label for="gender">Geder:</label>
+      <select class="form-control" id="gender" [(ngModel)]="userForm.gender">
+        <option value="M">Male</option>
+        <option value="F">Female</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="mobile">Mobile:</label>
+      <input type="text" class="form-control" id="mobile" [(ngModel)]="userForm.mobile"/>
+    </div>
+
+    <br/>
+
+    <button class="btn btn-block" [ngClass]="{ 'btn-warning':isItUpdate, 'btn-primary':!isItUpdate }" (click)="addUpdateNewUser()">
+      <i class="fa" [ngClass]="{ 'fa-pencil-square-o':isItUpdate, ' fa-user-plus':!isItUpdate }"></i> {{ (isItUpdate) ? 'Update' : 'Add' }} User
+    </button>
+    <button class="btn btn-default btn-block" (click)="clearUser()"><i class="fa fa-refresh"></i> Reset</button>
+
+    <br/>
+  
+  </div>
+
+  <div class="col-md-8">
+
+    <div class="table-responsive">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Gender</th>        
+            <th>Mobile</th>
+            <th>Actions</th>
+          </tr>          
+        </thead>
+  
+        <tbody>
+          <tr *ngFor="let user of currentUsers; let i = index">
+            <td>{{ user.id }}</td>
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ (user.gender == 'M') ? 'Male' : 'Female' }}</td>
+            <td>{{ user.mobile }}</td>
+            <td>
+              <button class="btn btn-warning" (click)="arrangeUpdateUser(user.id)"><i class="fa fa-pencil-square-o"></i></button>
+              <button class="btn btn-danger" (click)="deleteUser(user.id)"><i class="fa fa-trash-o"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+  </div>
+
+</div>
